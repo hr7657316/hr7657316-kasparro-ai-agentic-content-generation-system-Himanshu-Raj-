@@ -27,7 +27,7 @@ Each agent is a specialized component that uses an LLM (Google Gemini) via LangC
 ## Data Flow
 ```mermaid
 graph TD
-    subgraph Orchestrator [Orchestrator Logic (LangGraph)]
+    subgraph Orchestrator ["Orchestrator Logic (LangGraph)"]
         Start[Input Data] --> Parser[DataParserAgent]
         Parser --> QGen[QuestionGeneratorAgent]
         QGen --> Comp[CompetitorGenerationAgent]
