@@ -27,15 +27,28 @@ Each agent is a specialized component that uses an LLM (Google Gemini) via LangC
 ## Data Flow
 ```mermaid
 graph TD
-    subgraph Orchestrator ["Orchestrator Logic (LangGraph)"]
-        Start[Input Data] --> Parser[DataParserAgent]
-        Parser --> QGen[QuestionGeneratorAgent]
-        QGen --> Comp[CompetitorGenerationAgent]
-        Comp --> Draft[ContentDraftingAgent]
-        Draft --> Assemble[PageAssemblerAgent]
-        Assemble --> Validate[ValidationAgent]
-        Validate --> End[Output JSON]
-    end
+    Input[Input JSON] --> Orchestrator
+    Orchestrator --> DataParser[DataParserAgent]
+    DataParser --> ProductModel[Product Model]
+    ProductModel --> QuestionGenerator[QuestionGeneratorAgent]
+    ProductModel --> CompetitorGen[CompetitorGenerationAgent]
+    
+    ProductModel --> ContentLogic[ContentLogicAgent]
+    CompetitorGen --> Competitor[Competitor Data]
+    Competitor --> ContentLogic
+    
+    QuestionGenerator --> Questions[List of Q&A]
+    ContentLogic --> ContentBlocks[Content Blocks]
+    
+    Questions --> PageAssembler[PageAssemblerAgent]
+    ContentBlocks --> PageAssembler
+    ProductModel --> PageAssembler
+    Competitor --> PageAssembler
+    
+    PageAssembler --> Pages[JSON Pages]
+    Pages --> Validator[ValidationAgent]
+    Validator --> Output[Final Output]
+
 ```
 
 ## Configuration
