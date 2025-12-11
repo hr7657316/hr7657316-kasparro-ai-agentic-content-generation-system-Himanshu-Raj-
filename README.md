@@ -51,4 +51,3 @@ python main.py --input data/input_product.json --output output
 - `ContentDraftingAgent`: Writes copy.
 - `PageAssemblerAgent`: Builds final JSON.
 - `ValidationAgent`: Reviews output.
-# hr7657316-kasparro-ai-agentic-content-generation-system-Himanshu-Raj-
